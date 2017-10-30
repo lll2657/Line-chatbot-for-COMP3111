@@ -128,7 +128,7 @@ class Transcript {
         return output;
     }
     
-    public void generateTranscriptForWidth(int width) {
+    public void generateTranscriptForWidth(int width, boolean print) {
         StringBuilder transcriptBuilder = new StringBuilder();
 
         // By finding the remaining half of the spaces, we center align the text.
@@ -157,8 +157,10 @@ class Transcript {
      // The footer consists of the line separating the transcript body and the line indicating
         // the semester GPA.
         totalLines += 2;
-
-        System.out.println(transcriptBuilder.toString());
+        
+        if(print == true){
+        	System.out.println(transcriptBuilder.toString());
+        }
     }
 
     /**
@@ -170,7 +172,8 @@ class Transcript {
      * @return The total number of lines required to display the transcript with respect to the
      *         {@code width} argument.
      */
-    public int transcriptHeightForWidth(int width) {       
+    public int transcriptHeightForWidth(int width) {     
+    	generateTranscriptForWidth(width,false);
         return totalLines;
     }
 }
@@ -182,7 +185,7 @@ public class RefactoringLab {
             new ClassResult("COMP3311", "Database Management Systems", 3.3, 3),
         };
         Transcript transcript = new Transcript("John Chan", "21039408", "2017F", classResults);
-        transcript.generateTranscriptForWidth(20);
+        transcript.generateTranscriptForWidth(20, true);
         System.out.println("Total lines: " + transcript.transcriptHeightForWidth(20));
     }
 }
